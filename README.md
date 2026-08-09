@@ -1,16 +1,77 @@
-# React + Vite
+<div  align="center" ><img src="./.github\readme-assets\prjectThriller.gif" alt="Project thriller"/></div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🖥️ PixDOP
 
-Currently, two official plugins are available:
+PixDOP is my attempt at turning a portfolio website into a small pixel-art computer. Instead of scrolling through sections, visitors can explore my work through a desktop-like experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> **PixDOP = Pixel-art Desktop-themed Online Portfolio**
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🎯 Project Vision
 
-## Expanding the ESLint configuration
+The goal of PixDOP is to create a portfolio that is:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🎮 **Creative** — more like an experience than a normal portfolio
+- 🖥️ **Desktop-inspired** — designed around an operating-system interface
+- 🕹️ **Pixel-art focused** — keeping a consistent pixel-art visual identity
+- ⚡ **Fast** — animations and interactions should remain smooth
+- 📱 **Responsive** — usable on different screen sizes and devices
+- 💼 **Professional** — despite the game/OS-inspired design, it should still represent me professionally
+- ✨ **Interactive** — visitors should be able to explore the portfolio rather than simply scroll through it
+
+The main idea is to make the portfolio feel like **entering a small personal computer built around my work**.
+
+---
+
+## 🚀 Planned Features
+
+### 🖥️ Desktop Environment
+
+- Pixel-art desktop UI
+- Desktop icons
+- Taskbar
+- Start/menu system
+- Windows
+- Window dragging
+- Window minimizing/maximizing/closing
+- Multiple windows open at the same time
+- Desktop background
+- Context menus
+- Notifications
+
+### 📁 Portfolio Applications
+
+Different parts of my portfolio will behave like applications.
+
+Possible applications include:
+
+- **About Me** — introduction and personal information
+- **Projects** — showcase of my projects
+- **Skills** — technologies and tools I use
+- **Experience** — education, experience, and development journey
+- **Contact** — ways to get in touch
+- **Terminal** — an interactive terminal containing additional information
+- **Browser** — potentially used for project demos or external pages
+- **Settings** — customize parts of the PixDOP experience
+- **etc**
+
+---
+
+## 📌 Current Status
+
+> 🚧 **Early Development**
+
+PixDOP is currently in the planning/foundation stage.
+
+The design, architecture, features, and technology choices may change as development progresses.
+
+This README will be updated as new features are implemented.
+
+---
+
+## 📜 License
+
+This project is primarily a personal portfolio project.
+
+More information about the license will be added as the project develops.
