@@ -2,12 +2,76 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pixdop</title>
+    <title>PixDOP</title>
+    <link rel="stylesheet" href="./src/boot/bootScreen.css" />
   </head>
   <body>
+    <!-- THE BOOT SCREEN HTML (shows instantly) -->
+    <div id="boot-screen">
+      <div class="spinner"></div>
+      <h1>PixDOP</h1>
+      <div class="progress-container">
+        <div id="progress-fill" style="width: 0%"></div>
+      </div>
+      <p id="status-text">Initializing...</p>
+    </div>
+
     <div id="root"></div>
+
+    <script type="module">
+      import { BootManager } from "/src/boot/bootloader.js";
+
+      function loadImage(src) {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve(img);
+          img.onerror = () => resolve(null);
+          img.src = src;
+        });
+      }
+
+      // CHANGE LATER (ADD ALL IMAGE PATHs)
+      const imageSources = [
+        "/assets/images/wallpaper.png",
+        "/assets/icons/folder.png",
+        "/assets/icons/desktop.png",
+      ];
+
+      const progressBar = document.getElementById("progress-fill");
+      const statusText = document.getElementById("status-text");
+      const bootScreen = document.getElementById("boot-screen");
+
+      const boot = new BootManager();
+
+      boot.onProgress = (percent, taskName) => {
+        progressBar.style.width = percent + "%";
+        statusText.textContent = `Loading ${taskName}... ${percent}%`;
+
+        if (percent === 100) {
+          statusText.textContent = "System ready!";
+
+          bootScreen.classList.add("fade-out");
+
+          setTimeout(() => {
+            import("/src/main.jsx").then((module) => {
+              module.mountApp();
+            });
+          }, 600);
+        }
+      };
+
+      boot.addTask("Images", Promise.all(imageSources.map(loadImage)));
+
+      boot.addTask("Application Kernel", import("/src/main.jsx"));
+
+      // for Loading custom fonts later
+      // boot.addTask('Fonts', document.fonts.load('1rem "Press Start 2P"'));
+
+      boot.start();
+    </script>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
