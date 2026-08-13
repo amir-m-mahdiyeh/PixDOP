@@ -53,89 +53,91 @@
             <span id="progress-percent">0%</span>
           </div>
 
-          <!-- Boot tasks -->
-          <div id="boot-tasks" class="boot-tasks">
-            <div class="boot-task" data-task="core">
-              <span class="task-icon">▣</span>
+          <div id="task-and-system-container">
+            <!-- Boot tasks -->
+            <div id="boot-tasks" class="boot-tasks">
+              <div class="boot-task" data-task="core">
+                <span class="task-icon">▣</span>
 
-              <span class="task-name"> CORE SYSTEM </span>
+                <span class="task-name"> CORE SYSTEM </span>
 
-              <span class="task-dots"></span>
+                <span class="task-dots"></span>
 
-              <span class="task-status">[ PENDING ]</span>
+                <span class="task-status">[ PENDING ]</span>
+              </div>
+
+              <div class="boot-task" data-task="fonts">
+                <span class="task-icon">T</span>
+
+                <span class="task-name"> FONTS &amp; UI </span>
+
+                <span class="task-dots"></span>
+
+                <span class="task-status">[ PENDING ]</span>
+              </div>
+
+              <div class="boot-task" data-task="desktop">
+                <span class="task-icon">▰</span>
+
+                <span class="task-name"> DESKTOP ENVIRONMENT </span>
+
+                <span class="task-dots"></span>
+
+                <span class="task-status">[ PENDING ]</span>
+              </div>
+
+              <div class="boot-task" data-task="assets">
+                <span class="task-icon">▧</span>
+
+                <span class="task-name"> PORTFOLIO ASSETS </span>
+
+                <span class="task-dots"></span>
+
+                <span class="task-status">[ PENDING ]</span>
+              </div>
+
+              <div class="boot-task" data-task="modules">
+                <span class="task-icon">◎</span>
+
+                <span class="task-name"> CONNECTING MODULES </span>
+
+                <span class="task-dots"></span>
+
+                <span class="task-status">[ PENDING ]</span>
+              </div>
+
+              <div class="boot-task" data-task="launch">
+                <span class="task-icon">⚒</span>
+
+                <span class="task-name"> LAUNCHING PIXDOP </span>
+
+                <span class="task-dots"></span>
+
+                <span class="task-status">[ PENDING ]</span>
+              </div>
             </div>
 
-            <div class="boot-task" data-task="fonts">
-              <span class="task-icon">T</span>
+            <!-- Side information panel -->
+            <aside class="system-panel">
+              <div class="panel-header">
+                <span class="panel-icon">▣</span>
 
-              <span class="task-name"> FONTS &amp; UI </span>
+                <span>PIXDOS v1.0</span>
+              </div>
 
-              <span class="task-dots"></span>
+              <div class="panel-divider"></div>
 
-              <span class="task-status">[ PENDING ]</span>
-            </div>
+              <p>
+                A pixel-art desktop themed online portfolio, built with passion
+                and pixels.
+              </p>
 
-            <div class="boot-task" data-task="desktop">
-              <span class="task-icon">▰</span>
-
-              <span class="task-name"> DESKTOP ENVIRONMENT </span>
-
-              <span class="task-dots"></span>
-
-              <span class="task-status">[ PENDING ]</span>
-            </div>
-
-            <div class="boot-task" data-task="assets">
-              <span class="task-icon">▧</span>
-
-              <span class="task-name"> PORTFOLIO ASSETS </span>
-
-              <span class="task-dots"></span>
-
-              <span class="task-status">[ PENDING ]</span>
-            </div>
-
-            <div class="boot-task" data-task="modules">
-              <span class="task-icon">◎</span>
-
-              <span class="task-name"> CONNECTING MODULES </span>
-
-              <span class="task-dots"></span>
-
-              <span class="task-status">[ PENDING ]</span>
-            </div>
-
-            <div class="boot-task" data-task="launch">
-              <span class="task-icon">⚒</span>
-
-              <span class="task-name"> LAUNCHING PIXDOP </span>
-
-              <span class="task-dots"></span>
-
-              <span class="task-status">[ PENDING ]</span>
-            </div>
+              <div class="panel-thanks">
+                <span>♥</span>
+                THANK YOU FOR VISITING!
+              </div>
+            </aside>
           </div>
-
-          <!-- Side information panel -->
-          <aside class="system-panel">
-            <div class="panel-header">
-              <span class="panel-icon">▣</span>
-
-              <span>PIXDOS v1.0</span>
-            </div>
-
-            <div class="panel-divider"></div>
-
-            <p>
-              A pixel-art desktop themed online portfolio, built with passion
-              and pixels.
-            </p>
-
-            <div class="panel-thanks">
-              <span>♥</span>
-              THANK YOU FOR VISITING!
-            </div>
-          </aside>
         </main>
 
         <!-- Footer -->
@@ -150,7 +152,7 @@
 
     <div id="root"></div>
 
-    <script type="module">
+    <!-- <script type="module">
       import { BootManager } from "/src/boot/bootLoader.js";
 
       const bootScreen = document.getElementById("boot-screen");
@@ -331,6 +333,6 @@
       );
 
       boot.start();
-    </script>
+    </script> -->
   </body>
 </html>
