@@ -2,76 +2,335 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="PixDOP — a pixel-art desktop-themed online portfolio."
+    />
+
+    <link rel="icon" type="image/webp" href="/favicon/logo-512.webp" />
+
     <title>PixDOP</title>
-    <link rel="stylesheet" href="./src/boot/bootScreen.css" />
+
+    <link rel="stylesheet" href="/src/boot/bootScreen.css" />
   </head>
+
   <body>
-    <!-- THE BOOT SCREEN HTML (shows instantly) -->
     <div id="boot-screen">
-      <div class="spinner"></div>
-      <h1>PixDOP</h1>
-      <div class="progress-container">
-        <div id="progress-fill" style="width: 0%"></div>
+      <div class="boot-container">
+        <!-- Logo -->
+        <header class="boot-header">
+          <img
+            class="boot-logo"
+            src="/favicon/logo-512.webp"
+            alt="PixDOP logo"
+          />
+
+          <div class="boot-title">Pix<span>DOP</span></div>
+
+          <p class="boot-subtitle">
+            <span>•</span>
+            PIXEL-ART DESKTOP-THEMED ONLINE PORTFOLIO
+            <span>•</span>
+          </p>
+        </header>
+
+        <!-- Boot section -->
+        <main class="boot-main">
+          <div class="section-title">
+            <span></span>
+            <p>BOOTING PIXDOP...</p>
+            <span></span>
+          </div>
+
+          <!-- Progress -->
+          <div class="progress-row">
+            <div class="progress-container">
+              <div id="progress-fill"></div>
+            </div>
+
+            <span id="progress-percent">0%</span>
+          </div>
+
+          <!-- Boot tasks -->
+          <div id="boot-tasks" class="boot-tasks">
+            <div class="boot-task" data-task="core">
+              <span class="task-icon">▣</span>
+
+              <span class="task-name"> CORE SYSTEM </span>
+
+              <span class="task-dots"></span>
+
+              <span class="task-status">[ PENDING ]</span>
+            </div>
+
+            <div class="boot-task" data-task="fonts">
+              <span class="task-icon">T</span>
+
+              <span class="task-name"> FONTS &amp; UI </span>
+
+              <span class="task-dots"></span>
+
+              <span class="task-status">[ PENDING ]</span>
+            </div>
+
+            <div class="boot-task" data-task="desktop">
+              <span class="task-icon">▰</span>
+
+              <span class="task-name"> DESKTOP ENVIRONMENT </span>
+
+              <span class="task-dots"></span>
+
+              <span class="task-status">[ PENDING ]</span>
+            </div>
+
+            <div class="boot-task" data-task="assets">
+              <span class="task-icon">▧</span>
+
+              <span class="task-name"> PORTFOLIO ASSETS </span>
+
+              <span class="task-dots"></span>
+
+              <span class="task-status">[ PENDING ]</span>
+            </div>
+
+            <div class="boot-task" data-task="modules">
+              <span class="task-icon">◎</span>
+
+              <span class="task-name"> CONNECTING MODULES </span>
+
+              <span class="task-dots"></span>
+
+              <span class="task-status">[ PENDING ]</span>
+            </div>
+
+            <div class="boot-task" data-task="launch">
+              <span class="task-icon">⚒</span>
+
+              <span class="task-name"> LAUNCHING PIXDOP </span>
+
+              <span class="task-dots"></span>
+
+              <span class="task-status">[ PENDING ]</span>
+            </div>
+          </div>
+
+          <!-- Side information panel -->
+          <aside class="system-panel">
+            <div class="panel-header">
+              <span class="panel-icon">▣</span>
+
+              <span>PIXDOS v1.0</span>
+            </div>
+
+            <div class="panel-divider"></div>
+
+            <p>
+              A pixel-art desktop themed online portfolio, built with passion
+              and pixels.
+            </p>
+
+            <div class="panel-thanks">
+              <span>♥</span>
+              THANK YOU FOR VISITING!
+            </div>
+          </aside>
+        </main>
+
+        <!-- Footer -->
+        <footer class="boot-footer">
+          <span class="copyright"
+            >&copy; 2026 Amir M. Mahdiyeh. All rights reserved.</span
+          >
+          <span class="version">v1.0.0</span>
+        </footer>
       </div>
-      <p id="status-text">Initializing...</p>
     </div>
 
     <div id="root"></div>
 
     <script type="module">
-      import { BootManager } from "/src/boot/bootloader.js";
+      import { BootManager } from "/src/boot/bootLoader.js";
+
+      const bootScreen = document.getElementById("boot-screen");
+      const progressFill = document.getElementById("progress-fill");
+      const progressPercent = document.getElementById("progress-percent");
+
+      const boot = new BootManager();
+
+      let appModule = null;
+
+      const taskElements = {
+        core: document.querySelector('[data-task="core"]'),
+        fonts: document.querySelector('[data-task="fonts"]'),
+        desktop: document.querySelector('[data-task="desktop"]'),
+        assets: document.querySelector('[data-task="assets"]'),
+        modules: document.querySelector('[data-task="modules"]'),
+        launch: document.querySelector('[data-task="launch"]'),
+      };
+
+      function setTaskStatus(task, status) {
+        const element = taskElements[task];
+
+        if (!element) return;
+
+        const statusElement = element.querySelector(".task-status");
+
+        statusElement.textContent = `[ ${status} ]`;
+
+        element.dataset.status = status.toLowerCase();
+
+        if (status === "OK") {
+          element.classList.contains("loading") &&
+            element.classList.remove("loading");
+
+          element.classList.add("complete");
+        }
+
+        if (status === "LOADING") {
+          element.classList.add("loading");
+        }
+      }
 
       function loadImage(src) {
-        return new Promise((resolve) => {
-          const img = new Image();
-          img.onload = () => resolve(img);
-          img.onerror = () => resolve(null);
-          img.src = src;
+        return new Promise((resolve, reject) => {
+          const image = new Image();
+
+          image.onload = () => resolve(image);
+
+          image.onerror = () => {
+            reject(new Error(`Failed to load image: ${src}`));
+          };
+
+          image.src = src;
         });
       }
 
-      // CHANGE LATER (ADD ALL IMAGE PATHs)
       const imageSources = [
         "/assets/images/wallpaper.png",
         "/assets/icons/folder.png",
         "/assets/icons/desktop.png",
       ];
 
-      const progressBar = document.getElementById("progress-fill");
-      const statusText = document.getElementById("status-text");
-      const bootScreen = document.getElementById("boot-screen");
+      /*
+       * CORE SYSTEM
+       */
+      boot.addTask("Core System", async () => {
+        setTaskStatus("core", "LOADING");
 
-      const boot = new BootManager();
+        await Promise.resolve();
 
-      boot.onProgress = (percent, taskName) => {
-        progressBar.style.width = percent + "%";
-        statusText.textContent = `Loading ${taskName}... ${percent}%`;
+        setTaskStatus("core", "OK");
+      });
 
-        if (percent === 100) {
-          statusText.textContent = "System ready!";
+      /*
+       * FONTS & UI
+       */
+      boot.addTask("Fonts & UI", async () => {
+        setTaskStatus("fonts", "LOADING");
 
-          bootScreen.classList.add("fade-out");
+        await document.fonts.ready;
 
-          setTimeout(() => {
-            import("/src/main.jsx").then((module) => {
-              module.mountApp();
-            });
-          }, 600);
+        setTaskStatus("fonts", "OK");
+      });
+
+      /*
+       * DESKTOP ENVIRONMENT
+       */
+      boot.addTask("Desktop Environment", async () => {
+        setTaskStatus("desktop", "LOADING");
+
+        await Promise.resolve();
+
+        setTaskStatus("desktop", "OK");
+      });
+
+      /*
+       * PORTFOLIO ASSETS
+       */
+      boot.addTask("Portfolio Assets", async () => {
+        setTaskStatus("assets", "LOADING");
+
+        await Promise.all(imageSources.map(loadImage));
+
+        setTaskStatus("assets", "OK");
+      });
+
+      /*
+       * CONNECTING MODULES
+       */
+      boot.addTask("Connecting Modules", async () => {
+        setTaskStatus("modules", "LOADING");
+
+        appModule = await import("/src/main.jsx");
+
+        setTaskStatus("modules", "OK");
+
+        return appModule;
+      });
+
+      /*
+       * LAUNCHING PIXDOP
+       */
+      boot.addTask("Launching PixDOP", async () => {
+        setTaskStatus("launch", "LOADING");
+
+        if (!appModule) {
+          throw new Error("Application module was not loaded.");
         }
+
+        appModule.mountApp();
+
+        setTaskStatus("launch", "OK");
+      });
+
+      /*
+       * Progress
+       */
+      boot.onProgress = (percent) => {
+        progressFill.style.width = `${percent}%`;
+        progressPercent.textContent = `${percent}%`;
       };
 
-      boot.addTask("Images", Promise.all(imageSources.map(loadImage)));
+      /*
+       * Finished
+       */
+      boot.onComplete = () => {
+        progressFill.style.width = "100%";
+        progressPercent.textContent = "100%";
 
-      boot.addTask("Application Kernel", import("/src/main.jsx"));
+        setTimeout(() => {
+          bootScreen.classList.add("fade-out");
 
-      // for Loading custom fonts later
-      // boot.addTask('Fonts', document.fonts.load('1rem "Press Start 2P"'));
+          bootScreen.addEventListener(
+            "transitionend",
+            () => {
+              bootScreen.remove();
+            },
+            { once: true },
+          );
+        }, 500);
+      };
+
+      /*
+       * ESC = skip boot sequence
+       */
+      document.addEventListener(
+        "keydown",
+        (event) => {
+          if (event.key !== "Escape") return;
+
+          if (appModule) {
+            appModule.mountApp();
+
+            bootScreen.classList.add("fade-out");
+          }
+        },
+        { once: true },
+      );
 
       boot.start();
     </script>
-
-    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
