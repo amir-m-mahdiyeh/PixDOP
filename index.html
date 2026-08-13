@@ -122,7 +122,7 @@
               <div class="panel-header">
                 <span class="panel-icon">▣</span>
 
-                <span>PIXDOS v1.0</span>
+                <span>PIXDOP v1.0</span>
               </div>
 
               <div class="panel-divider"></div>
@@ -152,7 +152,7 @@
 
     <div id="root"></div>
 
-    <!-- <script type="module">
+    <script type="module">
       import { BootManager } from "/src/boot/bootLoader.js";
 
       const bootScreen = document.getElementById("boot-screen");
@@ -162,6 +162,7 @@
       const boot = new BootManager();
 
       let appModule = null;
+      let appModulePromise = null;
 
       const taskElements = {
         core: document.querySelector('[data-task="core"]'),
@@ -193,6 +194,12 @@
         if (status === "LOADING") {
           element.classList.add("loading");
         }
+        if (status === "FAILED") {
+          element.classList.contains("loading") &&
+            element.classList.remove("loading");
+
+          element.classList.add("failed");
+        }
       }
 
       function loadImage(src) {
@@ -209,10 +216,10 @@
         });
       }
 
+      // add all the image paths
       const imageSources = [
-        "/assets/images/wallpaper.png",
-        "/assets/icons/folder.png",
-        "/assets/icons/desktop.png",
+        "/favicon/logo-512.webp",
+        "/favicon/does-not-exist.webp",
       ];
 
       /*
@@ -254,9 +261,15 @@
       boot.addTask("Portfolio Assets", async () => {
         setTaskStatus("assets", "LOADING");
 
-        await Promise.all(imageSources.map(loadImage));
+        try {
+          await Promise.all(imageSources.map(loadImage));
 
-        setTaskStatus("assets", "OK");
+          setTaskStatus("assets", "OK");
+        } catch (error) {
+          setTaskStatus("assets", "FAILED");
+
+          console.error("Portfolio assets failed:", error);
+        }
       });
 
       /*
@@ -265,7 +278,9 @@
       boot.addTask("Connecting Modules", async () => {
         setTaskStatus("modules", "LOADING");
 
-        appModule = await import("/src/main.jsx");
+        appModulePromise = import("/src/main.jsx");
+
+        appModule = await appModulePromise;
 
         setTaskStatus("modules", "OK");
 
@@ -277,6 +292,8 @@
        */
       boot.addTask("Launching PixDOP", async () => {
         setTaskStatus("launch", "LOADING");
+
+        appModule = await appModulePromise;
 
         if (!appModule) {
           throw new Error("Application module was not loaded.");
@@ -315,24 +332,7 @@
         }, 500);
       };
 
-      /*
-       * ESC = skip boot sequence
-       */
-      document.addEventListener(
-        "keydown",
-        (event) => {
-          if (event.key !== "Escape") return;
-
-          if (appModule) {
-            appModule.mountApp();
-
-            bootScreen.classList.add("fade-out");
-          }
-        },
-        { once: true },
-      );
-
       boot.start();
-    </script> -->
+    </script>
   </body>
 </html>
