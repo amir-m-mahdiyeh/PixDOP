@@ -308,7 +308,8 @@
   letter-spacing: 1px;
 }
 .panel-icon {
-  font-size: 18px;
+  font-size: 0.675rem;
+  color: var(--gray);
 }
 .panel-divider {
   height: 1px;
@@ -335,20 +336,24 @@
 .panel-thanks span {
   margin-right: 6px;
   font-size: 14px;
+  color: red;
+  animation: blink 0.8s steps(2) infinite;
 }
 
 /* ================================
 * FOOTER
 ==================================*/
 .boot-footer {
+  text-align: center;
   flex: 0 0 auto;
   display: flex;
   align-items: center;
   gap: 6px;
-  padding-top: 10px;
+  padding-top: 12px;
   color: #777;
-  font-size: 8px;
+  font-size: 10px;
   letter-spacing: 0.5px;
+  line-height: 2px;
 }
 .copyright {
   display: flex;
@@ -389,6 +394,10 @@
   }
   .task-name {
     font-size: 1rem;
+  }
+  .boot-footer {
+    font-size: 0.75rem;
+    font-weight: 600;
   }
 }
 @media (min-aspect-ratio: 1.5/1) and (orientation: landscape) and (max-height: 600px) {
