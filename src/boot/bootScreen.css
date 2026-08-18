@@ -120,6 +120,7 @@
   margin-top: 12px;
   padding-bottom: 10px;
   border-bottom: 2px solid var(--gold-dark);
+  line-height: 0px;
 }
 
 .section-title {
@@ -230,12 +231,13 @@
   font-size: 9px;
   letter-spacing: 0;
   flex-shrink: 0;
+  gap: 3px;
 }
 .task-icon {
   width: 22px;
   flex-shrink: 0;
   color: var(--gold-bright);
-  font-size: 12px;
+  font-size: 1rem;
   text-align: left;
 }
 .task-name {
@@ -313,7 +315,7 @@
 }
 .panel-divider {
   height: 1px;
-  margin: 6px 0 8px;
+  margin: 10px 0 8px;
   background: repeating-linear-gradient(
     90deg,
     var(--gold-dark) 0 8px,
@@ -398,6 +400,9 @@
   .boot-footer {
     font-size: 0.75rem;
     font-weight: 600;
+  }
+  .task-icon {
+    font-size: 1.2rem;
   }
 }
 @media (min-aspect-ratio: 1.5/1) and (orientation: landscape) and (max-height: 600px) {
