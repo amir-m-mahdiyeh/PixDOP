@@ -14,6 +14,13 @@
     <title>PixDOP</title>
 
     <link rel="stylesheet" href="/src/boot/bootScreen.css" />
+    <link
+      rel="preload"
+      href="/fonts/VT323-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
   </head>
 
   <body>
@@ -23,7 +30,7 @@
         <header class="boot-header">
           <img
             class="boot-logo"
-            src="/favicon/logo-512.webp"
+            src="/assets/images/logo.png"
             alt="PixDOP logo"
           />
 
@@ -217,10 +224,7 @@
       }
 
       // add all the image paths
-      const imageSources = [
-        "/favicon/logo-512.webp",
-        "/favicon/does-not-exist.webp",
-      ];
+      const imageSources = ["/assets/images/logo.png"];
 
       /*
        * CORE SYSTEM
@@ -332,7 +336,12 @@
         }, 500);
       };
 
-      boot.start();
+      let bootStarted = false;
+
+      if (!bootStarted) {
+        bootStarted = true;
+        boot.start();
+      }
     </script>
   </body>
 </html>

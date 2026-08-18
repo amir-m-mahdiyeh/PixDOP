@@ -362,7 +362,6 @@
 /* ================================
 * MEDIA QUERIES
 ==================================*/
-
 @media (min-width: 500px) and (orientation: landscape) {
   .boot-main {
     max-height: fit-content;
@@ -378,6 +377,20 @@
   }
 }
 
+@media (min-width: 700px) and (min-height: 700px) {
+  .boot-logo {
+    max-width: 60%;
+  }
+  .boot-title {
+    font-size: clamp(32px, 9vw, 60px);
+  }
+  .boot-subtitle {
+    font-size: clamp(16px, 2vw, 16px);
+  }
+  .task-name {
+    font-size: 1rem;
+  }
+}
 @media (min-aspect-ratio: 1.5/1) and (orientation: landscape) and (max-height: 600px) {
   .boot-logo {
     max-width: 128px;
@@ -452,4 +465,29 @@
 
 #boot-screen::-webkit-scrollbar-button {
   display: none;
+}
+
+/* ================================
+* LOGO ANIMATION
+==================================*/
+
+.boot-logo {
+  animation: logo-boot ease-in-out 0.5s 0.1s;
+}
+
+@keyframes logo-boot {
+  0% {
+    transform: rotate(0deg);
+
+    filter: drop-shadow(0 0 5rem var(--gold-bright));
+  }
+  100% {
+    transform: rotate(180deg);
+    filter: drop-shadow(0 0 2.5rem var(--gold-bright));
+  }
+  100% {
+    transform: rotate(360deg);
+
+    filter: drop-shadow(0 0 0rem var(--gold-bright));
+  }
 }
